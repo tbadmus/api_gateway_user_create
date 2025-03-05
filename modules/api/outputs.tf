@@ -5,3 +5,7 @@ output "http_method" {
 output "api_url" {
   value = aws_api_gateway_deployment.deployment.invoke_url
 }
+
+output "stage" {
+  value = aws_api_gateway_stage.stage.stage_name
+}

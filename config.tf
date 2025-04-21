@@ -9,8 +9,8 @@ terraform {
 
   backend "s3" {
     profile        = "lbadmus"
-    bucket         = "elbee-backend-tf"
-    key            = "terraform.tfstate"
+    bucket         = "elbee-tf-state-mas9"
+    key            = "applicqation.tfstate"
     region         = "us-east-1"
     encrypt        = true
   }

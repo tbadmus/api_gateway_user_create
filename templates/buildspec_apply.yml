@@ -3,11 +3,8 @@ version: 0.2
 env:
   variables:
     CODE_SRC_DIR: "."
-    SCRIPT_DIR: "templates/scripts"
     TF_VERSION: "1.9.8"
-    SKIPVALIDATIONFAILURE: "Y"
-    ENABLE_TFVALIDATE: "Y"
-    ENABLE_TFFORMAT: "Y"
+
 
 
 phases:
@@ -20,13 +17,20 @@ phases:
       - "mv terraform /bin"
       - "rm terraform.zip"
 
+  pre_build:
+    commands:
+      - "echo ## TERRAFORM APPLY : Starting Terraform apply phase..."
+      - terraform --version
+
   build:
     commands:
       - "cd ${CODEBUILD_SRC_DIR}/${CODE_SRC_DIR}"
-      - "echo ## TERRAFORM INIT : Initialize the Terraform Workspace"
-      - "terraform init"
-      - "echo ## VALIDATION : Starting ..."
-      - "/bin/bash ${CODEBUILD_SRC_DIR}/${SCRIPT_DIR}/tf_validation.sh ${SKIPVALIDATIONFAILURE} ${ENABLE_TFVALIDATE} ${ENABLE_TFFORMAT}"
+      - terraform init -input=false
+      - terraform apply -input=false -out=tfplan
+
+  post_build:
+    commands:
+      - echo "Completed Terraform apply phase"
 
 artifacts:
   files:

@@ -33,7 +33,7 @@ phases:
       - echo "Completed Terraform plan phase"
 
 artifacts:
-files:
+  files:
     - tfplan
     - .terraform/**/*
     - '**/*'

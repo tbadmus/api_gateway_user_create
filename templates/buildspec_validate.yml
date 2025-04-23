@@ -26,7 +26,7 @@ phases:
       - "echo ## TERRAFORM INIT : Initialize the Terraform Workspace"
       - "terraform init"
       - "echo ## VALIDATION : Starting ..."
-      - "/bin/bash ${CODEBUILD_SRC_DIR}/${SCRIPT_DIR}/tf_validation.sh ${SKIPVALIDATIONFAILURE} ${ENABLE_TFVALIDATE} ${ENABLE_TFFORMAT}"
+      - "/bin/bash ${CODEBUILD_SRC_DIR}/${SCRIPT_DIR}/tf_validate.sh ${SKIPVALIDATIONFAILURE} ${ENABLE_TFVALIDATE} ${ENABLE_TFFORMAT}"
 
 artifacts:
   files:

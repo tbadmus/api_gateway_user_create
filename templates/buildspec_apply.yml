@@ -26,7 +26,7 @@ phases:
     commands:
       - "cd ${CODEBUILD_SRC_DIR}/${CODE_SRC_DIR}"
       - terraform init -input=false
-      - terraform apply -input=false -out=tfplan
+      - terraform apply -input=false tfplan
 
   post_build:
     commands:

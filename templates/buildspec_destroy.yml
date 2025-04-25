@@ -15,10 +15,20 @@ phases:
       - "mv terraform /bin"
       - "rm terraform.zip"
 
+  pre_build:
+    commands:
+      - "echo ## TERRAFORM DESTROY : Starting Terraform destroy phase..."
+      - terraform --version
+
   build:
     commands:
       - "cd ${CODEBUILD_SRC_DIR}/${CODE_SRC_DIR}"
+      - "terraform init -input=false"
       - "terraform destroy --auto-approve"
+
+  post_build:
+    commands:
+      - echo "Completed Terraform destroy phase"
 
 artifacts:
   files:
